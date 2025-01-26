@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt #Primero se debe instalar con el comando "pip install matplotlib"
+import matplotlib.pyplot as plt # Primero se debe instalar con el comando "pip install matplotlib"
 
 
 class Componente:
@@ -48,31 +48,31 @@ class Circuito:
 
     def graficar_resultados(self):
         """Generar gráficas de voltaje y corriente para cada componente."""
-        #Para hacer la gráfica se crean listas con los elementos que se van a imprimir
+        # Para hacer la gráfica se crean listas con los elementos que se van a imprimir
         voltajes = []
         nombres = []
         corrientes = []
 
         corriente_total = self.calcular_corriente_total()
         for componente in self.componentes:
-            if isinstance(componente, Resistencia): #Comprueba si la clase es una resistencia
+            if isinstance(componente, Resistencia): # Comprueba si la clase es una resistencia
                 voltaje = componente.calcular_voltaje(corriente_total)
                 voltajes.append(voltaje)
                 nombres.append(componente.nombre)
                 corrientes.append(corriente_total)
-                #Se calculan los valores respectivos a la resistencia y se añaden a las listas
+                # Se calculan los valores respectivos a la resistencia y se añaden a las listas
                 
-        #Se define el tamaño de la ventana con la gráfica
+        # Se define el tamaño de la ventana con la gráfica
         plt.figure(figsize=(10, 6))
 
-        #Se crea la gráfica de voltajes en una subgráfica
+        # Se crea la gráfica de voltajes en una subgráfica
         plt.subplot(2, 1, 1)
-        plt.bar(nombres, voltajes, color='blue') #Genera gráfico de barras con los valores de la lista
+        plt.bar(nombres, voltajes, color='blue') # Genera gráfico de barras con los valores de la lista
         plt.title("Voltajes en los Componentes")
-        plt.ylabel("Voltaje (V)") #Nombre del eje
-        plt.grid(axis='y', linestyle='--', alpha=0.7) #Se configuran las líneas guía de la gráfica
+        plt.ylabel("Voltaje (V)") # Nombre del eje
+        plt.grid(axis='y', linestyle='--', alpha=0.7) # Se configuran las líneas guía de la gráfica
 
-        #Lo mismo de arriba pero con la de corrientes
+        # Lo mismo de arriba pero con la de corrientes
         plt.subplot(2, 1, 2)
         plt.bar(nombres, corrientes, color='orange')
         plt.title("Corrientes en los Componentes")
@@ -80,11 +80,11 @@ class Circuito:
         plt.xlabel("Componentes")
         plt.grid(axis='y', linestyle='--', alpha=0.7)
 
-        #Se acomodan las gráficas para que no se solapen y luego se muestran
+        # Se acomodan las gráficas para que no se solapen y luego se muestran
         plt.tight_layout()
         plt.show()
 
-#Ejemplo:
+# Ejemplo:
 if __name__ == "__main__":
     r1 = Resistencia("R1", 100)  
     r2 = Resistencia("R2", 200)  
