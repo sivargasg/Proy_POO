@@ -1,4 +1,4 @@
-A continuación se presenta el diagrama de clases para simular circuitos eléctricos en corriente directa utilizando POO.
+A continuación se presenta la propuesta del diagrama de clases para simular circuitos eléctricos en corriente directa utilizando POO.
 
 ```mermaid
 classDiagram
