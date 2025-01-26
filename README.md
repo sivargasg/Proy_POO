@@ -1,4 +1,4 @@
-A continuación se presenta la propuesta del diagrama de clases para simular circuitos eléctricos en corriente directa utilizando POO.
+A continuación se presenta la propuesta del diagrama de clases para simular circuitos eléctricos en corriente directa utilizando POO:
 
 ```mermaid
 classDiagram
@@ -41,3 +41,6 @@ classDiagram
     Componente <-- Capacitor
     Circuito --* "1..3" Componente : contiene
     Circuito --* "1" FuenteDC : utiliza
+```
+
+Adicionalmente, para crear las gráficas de tensión y corriente se planea utilizar matplotlib.
