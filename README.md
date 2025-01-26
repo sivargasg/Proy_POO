@@ -43,4 +43,4 @@ classDiagram
     Circuito --* "1" FuenteDC : utiliza
 ```
 
-Adicionalmente, para crear las gráficas de tensión y corriente se planea utilizar matplotlib.
+Por otra parte, para crear las gráficas de tensión y corriente se planea utilizar matplotlib.
