@@ -43,7 +43,13 @@ class Circuito:
                 if fuente:
                     return fuente.tension / resistencia_total
             case "paralelo":
-                return 0.0
+                resistencia_total = 1 / sum(1 / componente.valor for componente in 
+                                        self.componentes if 
+                                        isinstance(componente, Resistencia))
+                fuente = next((componente for componente in self.componentes 
+                               if isinstance(componente, FuenteDC)), 0)
+                if fuente:
+                    return fuente.tension / resistencia_total
         pass
 
     def graficar_resultados(self):
@@ -53,15 +59,26 @@ class Circuito:
         nombres = []
         corrientes = []
 
-        corriente_total = self.calcular_corriente_total()
-        for componente in self.componentes:
-            if isinstance(componente, Resistencia): # Comprueba si la clase es una resistencia
-                voltaje = componente.calcular_voltaje(corriente_total)
-                voltajes.append(voltaje)
-                nombres.append(componente.nombre)
-                corrientes.append(corriente_total)
-                # Se calculan los valores respectivos a la resistencia y se añaden a las listas
-                
+        match self.configuracion:
+            case "serie":
+                corriente_total = self.calcular_corriente_total()
+                for componente in self.componentes:
+                    if isinstance(componente, Resistencia): # Comprueba si la clase es una resistencia
+                        voltaje = componente.calcular_voltaje(corriente_total)
+                        voltajes.append(voltaje)
+                        nombres.append(componente.nombre)
+                        corrientes.append(corriente_total)
+                        # Se calculan los valores respectivos a la resistencia y se añaden a las listas
+            case "paralelo":
+                fuente = next((componente for componente in self.componentes 
+                               if isinstance(componente, FuenteDC)), 0)
+                for componente in self.componentes:
+                    if isinstance(componente, Resistencia):
+                        corriente = componente.calcular_corriente(fuente.tension)
+                        corrientes.append(corriente)
+                        nombres.append(componente.nombre)
+                        voltajes.append(fuente.tension)
+                        
         # Se define el tamaño de la ventana con la gráfica
         plt.figure(figsize=(10, 6))
 
@@ -90,7 +107,7 @@ if __name__ == "__main__":
     r2 = Resistencia("R2", 200)  
     fuente_tension = FuenteDC(10)        
 
-    circuito = Circuito([fuente_tension, r1, r2], "serie")
+    circuito = Circuito([fuente_tension, r1, r2], "paralelo")
     
     print(f"Corriente total en el circuito: {circuito.calcular_corriente_total()} A")
     circuito.graficar_resultados()
