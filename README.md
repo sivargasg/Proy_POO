@@ -45,7 +45,7 @@ classDiagram
 
     tk.Tk <|-- App
     Circuito --> FuenteDC : usa
-    Circuito o-- "0..1" Resistencia
+    Circuito o-- "1" Resistencia
     Circuito o-- "0..1" Inductor
     Circuito o-- "0..1" Capacitor 
     App --> Circuito : crea
