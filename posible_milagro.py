@@ -1,9 +1,9 @@
 import tkinter as tk
-from scipy.integrate import solve_ivp # pip install scipy
+from scipy.integrate import solve_ivp
 from tkinter import ttk, messagebox
-import numpy as np # pip install numpy
-import matplotlib.pyplot as plt # pip install matplotlib
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg 
+import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib.pyplot as plt
 
 
 class FuenteDC:
@@ -101,7 +101,7 @@ class Circuito:
             V_L = V_s - V_R - V_C
         
         elif (L is None) and (C is None) and (R is not None):
-            I = np.full_like(tiempo, R.valor / V0)
+            I = np.full_like(tiempo, V0 / R.valor)
             V_R = np.full_like(tiempo, V0)
             
         else:
@@ -166,7 +166,7 @@ class Circuito:
             I_total = I_R + I_C + I_L
         
         elif (L is None) and (C is None) and (R is not None):
-            I_total = np.full_like(tiempo, R.valor / V0)
+            I_total = np.full_like(tiempo, V0 / R.valor)
             V_nodo = np.full_like(tiempo, V0)
             
         else:
@@ -193,9 +193,9 @@ class App(tk.Tk):
         self.resistencia_var = tk.StringVar()
         self.inductor_var = tk.StringVar()
         self.capacitor_var = tk.StringVar()
-        self.configuracion_var = tk.StringVar(value="serie")  # "serie" o "paralelo"
-        self.duracion_var = tk.StringVar(value="1")  # Duración en segundos
-        self.voltaje_var = tk.StringVar(value="10")  # Voltaje de la fuente
+        self.configuracion_var = tk.StringVar(value="serie")
+        self.duracion_var = tk.StringVar(value="1")
+        self.voltaje_var = tk.StringVar(value="10")
 
         # Crear widgets de entrada
         self._crear_widgets()
@@ -231,7 +231,7 @@ class App(tk.Tk):
         tk.Label(frame, text="Duración (s):").grid(row=5, column=0, padx=5, pady=5)
         tk.Entry(frame, textvariable=self.duracion_var).grid(row=5, column=1, padx=5, pady=5)
 
-        tk.Button(frame, text="Simular y Graficar", command=self.simular).grid(row=6, column=0, columnspan=2, pady=10)
+        tk.Button(frame, text="Simular", command=self.simular).grid(row=6, column=0, columnspan=2, pady=10)
 
     def simular(self):
         try:
@@ -325,9 +325,11 @@ class App(tk.Tk):
             ax2.legend()
             ax2.grid(True)
 
+        self.fig.tight_layout()
         self.canvas.draw()
 
 
 if __name__ == "__main__":
     app = App()
     app.mainloop()
+
