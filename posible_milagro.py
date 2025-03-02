@@ -1,9 +1,9 @@
 import tkinter as tk
-from scipy.integrate import solve_ivp
+from scipy.integrate import solve_ivp # pip install scipy
 from tkinter import ttk, messagebox
-import numpy as np
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import matplotlib.pyplot as plt
+import numpy as np # pip install numpy
+import matplotlib.pyplot as plt # pip install matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg 
 
 
 class FuenteDC:
