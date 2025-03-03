@@ -1,0 +1,10 @@
+Circuitos_RLC/
+├── Simulador/
+    |  __init__.py
+    |  interfaz.py
+    ├── Circuito/
+        |  __init__.py
+        |  circuito.py
+        |  componentes.py
+        |  fuente.py
+       
