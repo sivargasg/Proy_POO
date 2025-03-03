@@ -1,4 +1,4 @@
-Simulador/
+Simulador_RLC/
 |  __init__.py
 |  interfaz.py
 ├── Circuito/
